@@ -2,11 +2,15 @@ package com.example.test.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import retrofit2.http.GET;
+
 public class User {
     @SerializedName("id")
     private  String id;
 
     @SerializedName("name")
+
+
     private String name;
 
     @SerializedName("pass")

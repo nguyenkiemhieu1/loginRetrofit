@@ -12,8 +12,4 @@ import retrofit2.http.POST;
 
 public interface API {
         String BASE_URL = "https://5fd22730b485ea0016eef89b.mockapi.io/";
-
-
-
-
 }

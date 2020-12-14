@@ -67,28 +67,34 @@ public class MainActivity extends AppCompatActivity implements ViewDangNhap {
         });
 
     }
-    
+
 
     public  void logintest(){
         name01 = edt_name.getText().toString();
         pass01 = edt_password.getText().toString();
-        if(name01.length() > 0 && pass01.length() > 0){
-            Call<List<User>> call =RetrofitClient.getClient().userlogin(name01, pass01);
-            call.enqueue(new Callback<List<User>>() {
-                @Override
-                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                    ArrayList<User>  arrayList = (ArrayList<User>)response.body();
-                    if(arrayList.size() >= 0 ){
-                        Log.d("BBBBB", arrayList.get(0).getName() + " + " + arrayList.get(0).getPassword());
-                        iPresenterLogicDangNhap.DangNhapThanhCong();
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<List<User>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"NONONONO", Toast.LENGTH_SHORT).show();
-                }
-            });
+        Log.d("aaaaaaa", name01 +" + "+ pass01);
+        if(name01.length() > 0){
+            if(pass01.length() > 0) {
+                Call<List<User>> call = RetrofitClient.getClient().userlogin(name01, pass01);
+                call.enqueue(new Callback<List<User>>() {
+                    @Override
+                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                        ArrayList<User> arrayList = (ArrayList<User>) response.body();
+                        if (arrayList.size() > 0) {
+                            Log.d("BBBBB", arrayList.get(0).getName() + " + " + arrayList.get(0).getPassword());
+                            iPresenterLogicDangNhap.DangNhapThanhCong();
+                        } else {
+                            iPresenterLogicDangNhap.ThatBai();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<User>> call, Throwable t) {
+
+                    }
+                });
+            }
 
         }
 
